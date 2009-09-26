@@ -8,7 +8,9 @@ This is a template/blueprint project intended as a Quick Start introduction to A
 
 h2. Requirements
 
-Other than maven you will need the Avro Maven Plugin to compile the protocol specification. I've included the Avro Maven plugin jar file in this repository for simplicity and to get you started quickly. However you can examine the source here: "avro-maven-plugin":http://github.com/phunt/avro-maven-plugin
+If you decide to use Maven you will need the Avro Maven Plugin to compile the protocol specification. I've included the Avro Maven plugin jar file in this repository for simplicity and to get you started quickly. However you can examine the source here: "avro-maven-plugin":http://github.com/phunt/avro-maven-plugin
+
+Ant based build has no additional requirements (just ant).
 
 h2. Introduction
 
