@@ -27,43 +27,36 @@ import org.apache.avro.specific.SpecificRequestor;
 import org.apache.avro.specific.SpecificResponder;
 import org.apache.avro.util.Utf8;
 
-import example.proto.Calc;
+import example.proto.Mail;
 
 /**
  *
  */
 public class Main {
-    public static class CalcImpl implements Calc {
-        public Utf8 add(Utf8 arg1, Utf8 arg2) {
-            return new Utf8(Integer.toString(Integer.parseInt(arg1.toString())
-                + Integer.parseInt(arg2.toString())));
-        }
-        public Utf8 sub(Utf8 arg1, Utf8 arg2) {
-            return new Utf8(Integer.toString(Integer.parseInt(arg1.toString())
-                    - Integer.parseInt(arg2.toString())));
+    public static class MailImpl implements Mail {
+        public Utf8 send(Message message) {
+            return new Utf8("Send message to " + message.to.toString()
+                            + " from " + message.from.toString()
+                            + " with body " + message.body.toString());
         }
       }
 
     public static void main(String[] args) throws IOException {
         if (args.length != 3) {
-            System.out.println("Usage: add|sub <arg1> <arg2>");
+            System.out.println("Usage: <to> <from> <body>");
         }
 
         SocketServer server = new SocketServer(new SpecificResponder(
-                Calc.class, new CalcImpl()), new InetSocketAddress(0));
+                Mail.class, new MailImpl()), new InetSocketAddress(0));
         SocketTransceiver client =
             new SocketTransceiver(new InetSocketAddress(server.getPort()));
-        Calc proxy = (Calc) SpecificRequestor.getClient(Calc.class, client);
+        Mail proxy = (Mail) SpecificRequestor.getClient(Mail.class, client);
 
-        if (args[0].equals("add")) {
-            System.out.println("Result: " + proxy.add(new Utf8(args[1]),
-                    new Utf8(args[2])));
-        } else if (args[0].equals("sub")) {
-            System.out.println("Result: " + proxy.sub(new Utf8(args[1]),
-                    new Utf8(args[2])));
-        } else {
-            System.out.println("Unknown operation " + args[0]);
-        }
+        Mail.Message message = new Mail.Message();
+        message.to = new Utf8(args[0]);
+        message.from = new Utf8(args[1]);
+        message.body = new Utf8(args[2]);
+        System.out.println("Result: " + proxy.send(message));
 
         client.close();
         server.close();
