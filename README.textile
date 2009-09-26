@@ -16,4 +16,12 @@ h2. Overview of the files
 
 h2. Compiling the sample
 
+<code>
+mvn compile
+</code>
+
 h2. Running the sample
+
+<code>
+mvn -e exec:java -Dexec.mainClass=example.Main -Dexec.args='avro_user pat Hello_World'
+</code>
