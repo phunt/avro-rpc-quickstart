@@ -30,34 +30,46 @@ import org.apache.avro.util.Utf8;
 import example.proto.Mail;
 
 /**
- *
+ * Start a server, attach a client, and send a message.
  */
 public class Main {
     public static class MailImpl implements Mail {
+        // in this simple example just return details of the message
         public Utf8 send(Message message) {
-            return new Utf8("Send message to " + message.to.toString()
+            return new Utf8("Sent message to " + message.to.toString()
                             + " from " + message.from.toString()
                             + " with body " + message.body.toString());
         }
       }
+
+    private static SocketServer server;
+    private static void startServer() throws IOException {
+        // the server implements the Mail protocol (MailImpl)
+        server = new SocketServer(new SpecificResponder(
+                Mail.class, new MailImpl()), new InetSocketAddress(0));
+    }
 
     public static void main(String[] args) throws IOException {
         if (args.length != 3) {
             System.out.println("Usage: <to> <from> <body>");
         }
 
-        SocketServer server = new SocketServer(new SpecificResponder(
-                Mail.class, new MailImpl()), new InetSocketAddress(0));
+        // usually this would be another app, but for simplicity
+        startServer();
+
+        // client code - attach to the server and send a message
         SocketTransceiver client =
             new SocketTransceiver(new InetSocketAddress(server.getPort()));
         Mail proxy = (Mail) SpecificRequestor.getClient(Mail.class, client);
 
+        // fill in the Message record and send it
         Mail.Message message = new Mail.Message();
         message.to = new Utf8(args[0]);
         message.from = new Utf8(args[1]);
         message.body = new Utf8(args[2]);
         System.out.println("Result: " + proxy.send(message));
 
+        // cleanup
         client.close();
         server.close();
     }
