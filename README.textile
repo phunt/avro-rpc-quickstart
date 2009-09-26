@@ -4,7 +4,7 @@ h1. Avro RPC Quick Start
 
 h2. Summary
 
-This is a template/blueprint project intended as a Quick Start introduction to Avro. You'll learn how to define a protocol, generate and compile your code, and run a working "Hello World" type example.
+This is a template/blueprint project intended as a Quick Start introduction to Avro. You'll learn how to define a protocol, generate and compile your code, and run a working "Hello World" type example. This project supports building with either Maven or Ant/Ivy, choose one.
 
 h2. Requirements
 
@@ -16,12 +16,24 @@ h2. Overview of the files
 
 h2. Compiling the sample
 
+Maven:
 <code>
 mvn compile
 </code>
 
+Ant/Ivy:
+<code>
+ant compile
+</code>
+
 h2. Running the sample
 
+Maven:
 <code>
 mvn -e exec:java -Dexec.mainClass=example.Main -Dexec.args='avro_user pat Hello_World'
+</code>
+
+Ant/Ivy:
+<code>
+ant exec:java
 </code>
