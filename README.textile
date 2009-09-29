@@ -111,7 +111,7 @@ src/main/avro should contain all of the Avro protocol & schema specifications. m
 
 Read more about Avro's "protocol declaration":http://hadoop.apache.org/avro/docs/current/spec.html#Protocol+Declaration
 
-h3. Main.java - the main() route of the Mail sample
+h3. Main.java - the main() routine of the Mail sample
 
 src/main/java/example/Main.java 
 # the MailImpl class implements the Mail protocol defined in mail.avpr
