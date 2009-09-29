@@ -132,7 +132,7 @@ Ant/Ivy:
 ant compile
 </code>
 
-*Note*: integration with eclipse is very simple. If you are using Ant, create a project and add the Main.java and jars contained in the lib directory (created/downloaded by ivy as part of compiling the project using build.xml). If using Maven just type "mvn eclipse:eclipse" (see the "maven-eclipse-plugin":http://maven.apache.org/plugins/maven-eclipse-plugin/ documentation for more details).
+*Note*: integration with eclipse is very simple. If you are using Ant, create a project and add the Main.java and jars contained in the target/lib directory (created/downloaded by ivy as part of compiling the project using build.xml). If using Maven just type "mvn eclipse:eclipse" (see the "maven-eclipse-plugin":http://maven.apache.org/plugins/maven-eclipse-plugin/ documentation for more details).
 
 h2. Running the sample
 
