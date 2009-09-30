@@ -27,7 +27,9 @@ Ant based build has no additional requirements (just ant).
 
 h3. Python Requirements
 
-Requires simplejson to be installed. Easiest way to do that is through python's "easy_install":
+The toplevel "lib/python" directory contains the Avro python library as well as a module "odict" used by Avro.
+
+Additionally Avro requires simplejson be available. Easiest way to do that is through python's "easy_install":
 
 <code>
 sudo easy_install simplejson
