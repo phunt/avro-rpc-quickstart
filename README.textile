@@ -1,15 +1,21 @@
-h1. Avro RPC Quick Start
+h1. "Avro RPC Quick Start":http://github.com/phunt/avro-rpc-quickstart
 
 *Author: "Patrick Hunt":http://people.apache.org/~phunt/* "(twitter)":http://twitter.com/phunt
 
-"Avro is a data serialization system."
-"http://hadoop.apache.org/avro/":http://hadoop.apache.org/avro/
-
-This quick start "document/project":http://github.com/phunt/avro-rpc-quickstart is current hosted at github.
-
 h2. Summary
 
-This is a template/blueprint project intended as a Quick Start introduction to Avro. You'll learn how to declare a protocol, generate and compile your code, and run a working "Hello World" type example. This project supports building with either Maven or Ant/Ivy, choose one.
+This is a starter kit, a project template if you will, for "Apache Avro":http://hadoop.apache.org/avro/ intended to bootstrap your Avro based project. You'll learn how to declare a protocol, generate and compile your code, and run a working "Hello World" type example. This project supports building with either Maven or Ant/Ivy, choose one.
+
+h3. What's Apache Avro?
+
+From the "official site":http://hadoop.apache.org/avro/: "Avro is a data serialization system"
+
+Avro provides:
+ * Rich data structures.
+ * A compact, fast, binary data format.
+ * A container file, to store persistent data.
+ * Remote procedure call (RPC).
+ * Simple integration with dynamic languages. Code generation is not required to read or write data files nor to use or implement RPC protocols. Code generation as an optional optimization, only worth implementing for statically typed languages. 
 
 h2. Requirements
 
