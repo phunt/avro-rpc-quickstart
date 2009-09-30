@@ -4,7 +4,7 @@ h1. "Avro RPC Quick Start":http://github.com/phunt/avro-rpc-quickstart
 
 h2. Summary
 
-This is a starter kit, a project template if you will, for "Apache Avro":http://hadoop.apache.org/avro/ intended to bootstrap your Avro based project. You'll learn how to declare a protocol, generate and compile your code, and run a working "Hello World" type example. This project supports building with either Maven or Ant/Ivy, choose one.
+"This is a starter kit":http://github.com/phunt/avro-rpc-quickstart, a project template if you will, for "Apache Avro":http://hadoop.apache.org/avro/ intended to bootstrap your Avro based project. You'll learn how to declare a protocol, generate and compile your code, and run a working "Hello World" type example. This project supports building with either Maven or Ant/Ivy, choose one.
 
 h3. What's Apache Avro?
 
