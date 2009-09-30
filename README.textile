@@ -35,6 +35,8 @@ In this sample project you will find four sets of files:
 
 h2. Overview of the files
 
+First I'll go through the build files, Ant/Ivy or Maven, then detail Avro protocol definition and main routine of the sample Mail application.
+
 h3. Ant/Ivy build files
 
 * build.xml - the Ant build file
