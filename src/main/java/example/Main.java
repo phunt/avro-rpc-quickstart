@@ -28,6 +28,7 @@ import org.apache.avro.specific.SpecificResponder;
 import org.apache.avro.util.Utf8;
 
 import example.proto.Mail;
+import example.proto.Message;
 
 /**
  * Start a server, attach a client, and send a message.
@@ -63,7 +64,7 @@ public class Main {
         Mail proxy = (Mail) SpecificRequestor.getClient(Mail.class, client);
 
         // fill in the Message record and send it
-        Mail.Message message = new Mail.Message();
+        Message message = new Message();
         message.to = new Utf8(args[0]);
         message.from = new Utf8(args[1]);
         message.body = new Utf8(args[2]);

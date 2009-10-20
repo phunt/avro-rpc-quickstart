@@ -30,7 +30,7 @@
   </configurations>
 
   <dependencies>
-    <dependency org="org.apache.hadoop" name="avro" rev="1.1.0"/>
+    <dependency org="org.apache.hadoop" name="avro" rev="1.2.0"/>
 
     <dependency org="junit" name="junit" rev="4.7" conf="test->default"/>
   </dependencies>
