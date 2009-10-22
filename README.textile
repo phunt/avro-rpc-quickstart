@@ -17,6 +17,10 @@ Avro provides:
  * Remote procedure call (RPC).
  * Simple integration with dynamic languages. Code generation is not required to read or write data files nor to use or implement RPC protocols. Code generation as an optional optimization, only worth implementing for statically typed languages. 
 
+h2. License
+
+This project is licensed under the Apache License Version 2.0
+
 h2. Requirements
 
 h3. Java Requirements
