@@ -17,31 +17,53 @@
 # limitations under the License.
 
 import sys
-import socket
+import httplib
+from threading import Thread
+import time
 
+from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import avro.ipc as ipc
-import avro.genericipc as genericipc
 import avro.protocol as protocol
 import avro.schema as schema
 
 PROTOCOL = protocol.parse(open("../avro/mail.avpr").read())
 
-class MailResponder(genericipc.Responder):
+class MailResponder(ipc.Responder):
     def __init__(self):
-        ipc.ResponderBase.__init__(self, PROTOCOL)
+        ipc.Responder.__init__(self, PROTOCOL)
 
     def invoke(self, msg, req):
-        if msg.getname() == 'send':
+        if msg.name == 'send':
             return ("Sent message to " + message['to']
                     + " from " + message['from']
                     + " with body " + message['body'])
         else:
             raise schema.AvroException("unexpected message:", msg.getname())
 
-def start_server():
-    addr = ('localhost', 0)
-    global server
-    server = ipc.SocketServer(MailResponder(), addr)
+class MailHandler(BaseHTTPRequestHandler):
+  def do_POST(self):
+    self.responder = MailResponder()
+    call_request_reader = ipc.FramedReader(self.rfile)
+    call_request = call_request_reader.read_framed_message()
+    resp_body = self.responder.respond(call_request)
+    self.send_response(200)
+    self.send_header('Content-Type', 'avro/binary')
+    self.end_headers()
+    resp_writer = ipc.FramedWriter(self.wfile)
+    resp_writer.write_framed_message(resp_body)
+
+server_addr = ('localhost', 9090)
+
+class MailServer(Thread):
+    def __init__(self):
+        Thread.__init__(self)
+        self.daemon = True
+
+    def run(self):
+        global server
+        server = HTTPServer(server_addr, MailHandler)
+        server.allow_reuse_address = True
+        server.serve_forever()
 
 class UsageError(Exception):
     def __init__(self, value):
@@ -54,14 +76,16 @@ if __name__ == '__main__':
         raise UsageError("Usage: <to> <from> <body>")
 
     # usually this would be another app, but for simplicity
-    global server
-    start_server()
+    server = MailServer()
+    server.start()
+
+    time.sleep(1) # give the server a moment to startup
 
     # client code - attach to the server and send a message
-    sock = socket.socket()
-    sock.connect(server.getaddress())
-    client = ipc.SocketTransceiver(sock)
-    requestor = genericipc.Requestor(PROTOCOL, client)
+    conn = httplib.HTTPConnection(server_addr[0], server_addr[1])
+    conn.connect()
+    client = ipc.HTTPTransceiver(conn)
+    requestor = ipc.Requestor(PROTOCOL, client)
     
     # fill in the Message record and send it
     message = dict()
@@ -75,4 +99,3 @@ if __name__ == '__main__':
 
     # cleanup
     client.close()
-    server.close()
