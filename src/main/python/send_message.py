@@ -18,52 +18,13 @@
 
 import sys
 import httplib
-from threading import Thread
-import time
 
-from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import avro.ipc as ipc
 import avro.protocol as protocol
-import avro.schema as schema
 
 PROTOCOL = protocol.parse(open("../avro/mail.avpr").read())
 
-class MailResponder(ipc.Responder):
-    def __init__(self):
-        ipc.Responder.__init__(self, PROTOCOL)
-
-    def invoke(self, msg, req):
-        if msg.name == 'send':
-            return ("Sent message to " + message['to']
-                    + " from " + message['from']
-                    + " with body " + message['body'])
-        else:
-            raise schema.AvroException("unexpected message:", msg.getname())
-
-class MailHandler(BaseHTTPRequestHandler):
-  def do_POST(self):
-    self.responder = MailResponder()
-    call_request_reader = ipc.FramedReader(self.rfile)
-    call_request = call_request_reader.read_framed_message()
-    resp_body = self.responder.respond(call_request)
-    self.send_response(200)
-    self.send_header('Content-Type', 'avro/binary')
-    self.end_headers()
-    resp_writer = ipc.FramedWriter(self.wfile)
-    resp_writer.write_framed_message(resp_body)
-
 server_addr = ('localhost', 9090)
-
-class MailServer(Thread):
-    def __init__(self):
-        Thread.__init__(self)
-        self.daemon = True
-
-    def run(self):
-        global server
-        server = HTTPServer(server_addr, MailHandler)
-        server.allow_reuse_address = True
-        server.serve_forever()
 
 class UsageError(Exception):
     def __init__(self, value):
@@ -74,12 +35,6 @@ class UsageError(Exception):
 if __name__ == '__main__':
     if len(sys.argv) != 4:
         raise UsageError("Usage: <to> <from> <body>")
-
-    # usually this would be another app, but for simplicity
-    server = MailServer()
-    server.start()
-
-    time.sleep(1) # give the server a moment to startup
 
     # client code - attach to the server and send a message
     conn = httplib.HTTPConnection(server_addr[0], server_addr[1])
