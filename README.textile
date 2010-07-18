@@ -95,7 +95,7 @@ The profile section adds the ibiblio repository, which holds the Avro dependenci
 
 You'll also see the plugin section, which contains:
 
-This plugin element causes the Avro Maven Plugin's protocol goal defined in "avro-maven-plugin":http://github.com/phunt/avro-maven-plugin to run during the "generate-sources" maven phase.
+This plugin element causes the Avro Maven Plugin's compile goal defined in "avro-maven-plugin":http://github.com/phunt/avro-maven-plugin to run during the "generate-sources" maven phase.
 
 <notextile><pre><code>      &lt;plugin>
         &lt;groupId>org.apache.avro&lt;/groupId>
@@ -105,7 +105,7 @@ This plugin element causes the Avro Maven Plugin's protocol goal defined in "avr
           &lt;execution>
             &lt;phase>generate-sources&lt;/phase>
             &lt;goals>
-              &lt;goal>protocol&lt;/goal>
+              &lt;goal>compile&lt;/goal>
             &lt;/goals>
           &lt;/execution>
         &lt;/executions>
