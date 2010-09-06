@@ -62,11 +62,12 @@ h3. Requirements
 
 If you decide to use Maven you will need the Avro Maven Plugin to compile the protocol specification. I've included the Avro Maven plugin jar file in this repository for simplicity and to get you started quickly. However you can examine the source here: "avro-maven-plugin":http://github.com/phunt/avro-maven-plugin
 
-Run the following if you are using maven:
+From this repository (avro-rpc-quickstart) run the following if you are using maven:
 
-<code>
+<notextile><pre><code>
+cd ./avro-maven-plugin
 mvn install:install-file -Dfile=./avro-maven-plugin-1.0-SNAPSHOT.jar -DpomFile=./avro-maven-plugin-1.0-SNAPSHOT.pom
-</code>
+</code></pre></notextile>
 
 Ant based build has no additional requirements (just ant).
 
