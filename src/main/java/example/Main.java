@@ -53,6 +53,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         if (args.length != 3) {
             System.out.println("Usage: <to> <from> <body>");
+            System.exit(1);
         }
 
         // usually this would be another app, but for simplicity
