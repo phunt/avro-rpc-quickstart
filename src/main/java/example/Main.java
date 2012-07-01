@@ -18,6 +18,15 @@
 
 package example;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+
+import org.apache.avro.ipc.SocketServer;
+import org.apache.avro.ipc.SocketTransceiver;
+import org.apache.avro.ipc.specific.SpecificRequestor;
+import org.apache.avro.ipc.specific.SpecificResponder;
+import org.apache.avro.util.Utf8;
+
 import example.proto.Mail;
 import example.proto.Message;
 import org.apache.avro.ipc.NettyServer;

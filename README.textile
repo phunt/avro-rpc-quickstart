@@ -4,11 +4,11 @@ h1. "Avro RPC Quick Start":http://github.com/phunt/avro-rpc-quickstart
 
 h2. Summary
 
-"This is a starter kit":http://github.com/phunt/avro-rpc-quickstart, a project template if you will, for "Apache Avro":http://hadoop.apache.org/avro/ intended to bootstrap your Avro based project. You'll learn how to declare a protocol, generate and compile your code, and run a working "Hello World" type example. This project supports building with either Maven or Ant/Ivy, choose one.
+"This is a starter kit":http://github.com/phunt/avro-rpc-quickstart, a project template if you will, for "Apache Avro":http://avro.apache.org/ intended to bootstrap your Avro based project. You'll learn how to declare a protocol, generate and compile your code, and run a working "Hello World" type example.
 
 h3. What's Apache Avro?
 
-From the "official site":http://hadoop.apache.org/avro/: "Avro is a data serialization system"
+From the "official site":http://avro.apache.org/: "Avro is a data serialization system"
 
 Avro provides:
  * Rich data structures.
@@ -23,13 +23,12 @@ This project is licensed under the Apache License Version 2.0
 
 h2. Introduction
 
-The sample application included in this project simulates a remote service, Mail, where Avro RPC is used to send a message using the service. This document details how to build and run the sample using either Ant or Maven. In either case the Avro jar files (and jars they depend upon) will be downloaded automatically.
+The sample application included in this project simulates a remote service, Mail, where Avro RPC is used to send a message using the service. This document details how to build and run the sample using Maven. The Avro jar files (and jars they depend upon) will be downloaded automatically.
 
 In this sample project you will find four sets of files:
 # This documentation
 # Sample Avro protocol declaration
 # Java quick start
-** Ant/Ivy build files
 ** Maven build file
 ** Sample application - i.e. Main program
 # Python quick start
@@ -46,7 +45,7 @@ src/main/avro should contain all of the Avro protocol & schema specifications. m
 # any specialized types used in the messages, Message in this case
 # we are declaring a "send" message type which takes a Message as an argument and returns a result string
 
-Read more about Avro's "protocol declaration":http://hadoop.apache.org/avro/docs/current/spec.html#Protocol+Declaration
+Read more about Avro's "protocol declaration":http://avro.apache.org/docs/current/spec.html#Protocol+Declaration
 
 h2. Current supported quickstart implementations
 
@@ -60,88 +59,41 @@ h2. Java
 
 h3. Requirements
 
-If you decide to use Maven you will need the Avro Maven Plugin to compile the protocol specification. I've included the Avro Maven plugin jar file in this repository for simplicity and to get you started quickly. However you can examine the source here: "avro-maven-plugin":http://github.com/phunt/avro-maven-plugin
-
-From this repository (avro-rpc-quickstart) run the following if you are using maven:
-
-<notextile><pre><code>
-cd ./avro-maven-plugin
-mvn install:install-file -Dfile=./avro-maven-plugin-1.0-SNAPSHOT.jar -DpomFile=./avro-maven-plugin-1.0-SNAPSHOT.pom
-</code></pre></notextile>
-
-Ant based build has no additional requirements (just ant).
-
-h3. Java Ant/Ivy build files
-
-* build.xml - the Ant build file
-* ivy.xml - this file specifies the dependencies of the project, primarily the Avro jar file
+* Maven
 
 h3. Java Maven build file
 
-* pom.xml - this file specifies the dependencies of the project, primarily the Avro jar file
+* pom.xml - this file specifies the dependencies of the project, primarily Avro itself.
 
-The profile section adds the ibiblio repository, which holds the Avro dependencies.
+You'll see the plugin section, which contains:
 
-<notextile><pre><code>    &lt;profile>
-      &lt;id>default&lt;/id>
-      &lt;repositories>
-        &lt;repository>
-          &lt;id>ibiblio&lt;/id>
-          &lt;name>www.ibiblio.org&lt;/name>
-          &lt;url>http://people.apache.org/repo/m2-ibiblio-rsync-repository&lt;/url>
-        &lt;/repository> 
-      &lt;/repositories> 
-    &lt;/profile>
-</code></pre></notextile>
+This plugin element causes the Avro Maven Plugin's compile goal to run during the "generate-sources" maven phase.
 
-You'll also see the plugin section, which contains:
-
-This plugin element causes the Avro Maven Plugin's compile goal defined in "avro-maven-plugin":http://github.com/phunt/avro-maven-plugin to run during the "generate-sources" maven phase.
-
-<notextile><pre><code>      &lt;plugin>
-        &lt;groupId>org.apache.avro&lt;/groupId>
-        &lt;artifactId>avro-maven-plugin&lt;/artifactId>
-        &lt;version>1.0-SNAPSHOT&lt;/version>
-        &lt;executions>
-          &lt;execution>
-            &lt;phase>generate-sources&lt;/phase>
-            &lt;goals>
-              &lt;goal>compile&lt;/goal>
-            &lt;/goals>
-          &lt;/execution>
-        &lt;/executions>
-      &lt;/plugin>
-</code></pre></notextile>
-
-The Paranamer plugin is necessary for Avro to access method parameter metadata (i.e. names) during runtime.
-
-<notextile><pre><code>      &lt;plugin>
-        &lt;groupId>com.thoughtworks.paranamer&lt;/groupId>
-        &lt;artifactId>paranamer-maven-plugin&lt;/artifactId>
-        &lt;executions>
-          &lt;execution>
-            &lt;id>run&lt;/id>  &lt;!-- id is optional -->
-            &lt;configuration>
-              &lt;sourceDirectory>${project.build.directory}/generated-sources/avro&lt;/sourceDirectory>
-              &lt;outputDirectory>${project.build.directory}/classes&lt;/outputDirectory>
-            &lt;/configuration>        
-            &lt;goals>
-              &lt;goal>generate&lt;/goal>
-            &lt;/goals>
-          &lt;/execution>
-        &lt;/executions>
-      &lt;/plugin>
-</code></pre></notextile>
-
-This tells Maven to target 1.5 JVM:
-
-<notextile><pre><code>      &lt;plugin>
-        &lt;artifactId>maven-compiler-plugin&lt;/artifactId>
-        &lt;configuration>
-          &lt;source>1.5&lt;/source>
-          &lt;target>1.5&lt;/target>
-        &lt;/configuration>
-      &lt;/plugin>
+<notextile><pre><code>            &lt;plugin>
+                &lt;groupId>org.apache.avro&lt;/groupId>
+                &lt;artifactId>avro-maven-plugin&lt;/artifactId>
+                &lt;version>1.7.0&lt;/version>
+                &lt;executions>
+                    &lt;execution>
+                        &lt;id>schemas&lt;/id>
+                        &lt;phase>generate-sources&lt;/phase>
+                        &lt;goals>
+                            &lt;goal>schema&lt;/goal>
+                            &lt;goal>protocol&lt;/goal>
+                            &lt;goal>idl-protocol&lt;/goal>
+                        &lt;/goals>
+                        &lt;configuration>
+                            &lt;excludes>
+                                &lt;exclude>**/mapred/tether/**&lt;/exclude>
+                            &lt;/excludes>
+                            &lt;sourceDirectory>${project.basedir}/src/main/avro/&lt;/sourceDirectory>
+                            &lt;outputDirectory>${project.basedir}/src/main/java/&lt;/outputDirectory>
+                            &lt;testSourceDirectory>${project.basedir}/src/test/avro/&lt;/testSourceDirectory>
+                            &lt;testOutputDirectory>${project.basedir}/src/test/java/&lt;/testOutputDirectory>
+                        &lt;/configuration>
+                    &lt;/execution>
+                &lt;/executions>
+            &lt;/plugin>
 </code></pre></notextile>
 
 h3. Main.java - the main() routine of the Java Mail sample
@@ -153,42 +105,32 @@ src/main/java/example/Main.java
 
 h3. Compiling the Java sample
 
-With either build system, maven or ant, all generated files (source, class, etc...) are written to the "target" directory.
+All generated files (source, class, etc...) are written to the "target" directory.
 
-Maven:
 <code>
 mvn compile
 </code>
 
-Ant/Ivy:
-<code>
-ant compile
-</code>
-
-*Note*: integration with eclipse is very simple. If you are using Ant, create a project and add the Main.java and jars contained in the target/lib directory (created/downloaded by ivy as part of compiling the project using build.xml). If using Maven just type "mvn eclipse:eclipse" (see the "maven-eclipse-plugin":http://maven.apache.org/plugins/maven-eclipse-plugin/ documentation for more details).
+*Note*: integration with eclipse is very simple. Just type "mvn eclipse:eclipse" (see the "maven-eclipse-plugin":http://maven.apache.org/plugins/maven-eclipse-plugin/ documentation for more details).
 
 h3. Running the Java sample
 
-Maven:
 <code>
 mvn -e exec:java -Dexec.mainClass=example.Main -Dexec.args='avro_user pat Hello_World'
-</code>
-
-Ant/Ivy:
-<code>
-ant exec:java
 </code>
 
 h2. Python
 
 h3. Requirements
 
-The toplevel "lib/python" directory contains the Avro python egg. This became available as of the 1.3.0 release.
+Avro is "available from pypi":http://pypi.python.org/pypi/avro
 
-Additionally Avro requires simplejson be available. Easiest way to do that is through python's "easy_install":
+It seems that the Avro python egg requires snappy.
 
 <code>
-sudo easy_install simplejson
+sudo apt-get install libsnappy-dev
+sudo pip install python-snappy
+sudo pip install avro
 </code>
 
 h3. Python - start_server.py
@@ -223,12 +165,10 @@ h2. Ruby
 
 h3. Requirements
 
-The toplevel "lib/ruby" directory contains the Avro ruby library. As of 1.3.1 a gem is available, however I am not clear the easiest way to integrate into this quickstart (ping me if you know).
-
-Additionally Avro requires yajl be available. Easiest way to do that is through ruby's "gem":
+Install the "avro ruby gem":http://rubygems.org/gems/avro
 
 <code>
-sudo gem install yajl-ruby
+sudo gem install avro
 </code>
 
 h3. Ruby - sample_ipc_server.rb
