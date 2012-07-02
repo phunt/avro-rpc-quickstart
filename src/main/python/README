@@ -1,7 +1,7 @@
 First run the server as:
 
-PYTHONPATH=../../../lib/python/avro-1.3.1-py2.6.egg ./start_server.py
+./start_server.py
 
 Then run the client as:
 
-PYTHONPATH=../../../lib/python/avro-1.3.1-py2.6.egg ./send_message.py avro_user pat Hello_World
+./send_message.py avro_user pat Hello_World

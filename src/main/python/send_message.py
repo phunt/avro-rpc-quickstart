@@ -37,9 +37,7 @@ if __name__ == '__main__':
         raise UsageError("Usage: <to> <from> <body>")
 
     # client code - attach to the server and send a message
-    conn = httplib.HTTPConnection(server_addr[0], server_addr[1])
-    conn.connect()
-    client = ipc.HTTPTransceiver(conn)
+    client = ipc.HTTPTransceiver(server_addr[0], server_addr[1])
     requestor = ipc.Requestor(PROTOCOL, client)
     
     # fill in the Message record and send it
