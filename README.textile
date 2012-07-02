@@ -190,11 +190,11 @@ h4. Run the ruby
 From the src/main/ruby directory run:
 
 <code>
-RUBYLIB=../../../lib/ruby ruby -r 'rubygems' ./sample_ipc_server.rb
+ruby -r 'rubygems' ./sample_ipc_server.rb
 </code>
 
 then in a separate shell run:
 
 <code>
-RUBYLIB=../../../lib/ruby ruby -r 'rubygems' ./sample_ipc_client.rb avro_user pat Hello_World
+ruby -r 'rubygems' ./sample_ipc_client.rb avro_user pat Hello_World
 </code>

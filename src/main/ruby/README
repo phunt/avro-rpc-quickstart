@@ -1,7 +1,7 @@
 First run the server as:
 
-RUBYLIB=../../../lib/ruby ruby -r 'rubygems' ./sample_ipc_server.rb
+ruby -r 'rubygems' ./sample_ipc_server.rb
 
 Then run the client as:
 
-RUBYLIB=../../../lib/ruby ruby -r 'rubygems' ./sample_ipc_client.rb avro_user pat Hello_World
+ruby -r 'rubygems' ./sample_ipc_client.rb avro_user pat Hello_World
