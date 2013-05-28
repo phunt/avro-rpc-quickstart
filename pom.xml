@@ -52,15 +52,6 @@
                             <goal>protocol</goal>
                             <goal>idl-protocol</goal>
                         </goals>
-                        <configuration>
-                            <excludes>
-                                <exclude>**/mapred/tether/**</exclude>
-                            </excludes>
-                            <sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
-                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
-                            <testSourceDirectory>${project.basedir}/src/test/avro/</testSourceDirectory>
-                            <testOutputDirectory>${project.basedir}/src/test/java/</testOutputDirectory>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
