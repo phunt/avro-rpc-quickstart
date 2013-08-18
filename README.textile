@@ -82,15 +82,6 @@ This plugin element causes the Avro Maven Plugin's compile goal to run during th
                             &lt;goal>protocol&lt;/goal>
                             &lt;goal>idl-protocol&lt;/goal>
                         &lt;/goals>
-                        &lt;configuration>
-                            &lt;excludes>
-                                &lt;exclude>**/mapred/tether/**&lt;/exclude>
-                            &lt;/excludes>
-                            &lt;sourceDirectory>${project.basedir}/src/main/avro/&lt;/sourceDirectory>
-                            &lt;outputDirectory>${project.basedir}/src/main/java/&lt;/outputDirectory>
-                            &lt;testSourceDirectory>${project.basedir}/src/test/avro/&lt;/testSourceDirectory>
-                            &lt;testOutputDirectory>${project.basedir}/src/test/java/&lt;/testOutputDirectory>
-                        &lt;/configuration>
                     &lt;/execution>
                 &lt;/executions>
             &lt;/plugin>
