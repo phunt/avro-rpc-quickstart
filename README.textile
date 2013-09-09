@@ -72,7 +72,7 @@ This plugin element causes the Avro Maven Plugin's compile goal to run during th
 <notextile><pre><code>            &lt;plugin>
                 &lt;groupId>org.apache.avro&lt;/groupId>
                 &lt;artifactId>avro-maven-plugin&lt;/artifactId>
-                &lt;version>1.7.4&lt;/version>
+                &lt;version>1.7.5&lt;/version>
                 &lt;executions>
                     &lt;execution>
                         &lt;id>schemas&lt;/id>
