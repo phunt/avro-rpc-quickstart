@@ -43,15 +43,6 @@ import java.net.InetSocketAddress;
  * Start a server, attach a client, and send a message.
  */
 public class Main {
-    public static class MailImpl implements Mail {
-        // in this simple example just return details of the message
-        public Utf8 send(Message message) {
-            System.out.println("Sending message");
-            return new Utf8("Sending message to " + message.getTo().toString()
-                    + " from " + message.getFrom().toString()
-                    + " with body " + message.getBody().toString());
-        }
-    }
 
     private static Server server;
 
