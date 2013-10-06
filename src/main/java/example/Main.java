@@ -28,6 +28,7 @@ import org.apache.avro.ipc.specific.SpecificResponder;
 import org.apache.avro.util.Utf8;
 
 import example.proto.Mail;
+import example.proto.MailImpl;
 import example.proto.Message;
 import org.apache.avro.ipc.NettyServer;
 import org.apache.avro.ipc.NettyTransceiver;
