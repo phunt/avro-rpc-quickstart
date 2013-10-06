@@ -28,6 +28,7 @@ import org.apache.avro.ipc.specific.SpecificResponder;
 import org.apache.avro.util.Utf8;
 
 import example.proto.Mail;
+import example.proto.MailImpl;
 import example.proto.Message;
 import org.apache.avro.ipc.NettyServer;
 import org.apache.avro.ipc.NettyTransceiver;
@@ -43,15 +44,6 @@ import java.net.InetSocketAddress;
  * Start a server, attach a client, and send a message.
  */
 public class Main {
-    public static class MailImpl implements Mail {
-        // in this simple example just return details of the message
-        public Utf8 send(Message message) {
-            System.out.println("Sending message");
-            return new Utf8("Sending message to " + message.getTo().toString()
-                    + " from " + message.getFrom().toString()
-                    + " with body " + message.getBody().toString());
-        }
-    }
 
     private static Server server;
 
