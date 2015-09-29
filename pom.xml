@@ -5,7 +5,7 @@
     <artifactId>avro-rpc-quickstart</artifactId>
     <packaging>jar</packaging>
     <version>1.7.5-SNAPSHOT</version>
-    <name>acro-rpc-quickstart</name>
+    <name>avro-rpc-quickstart</name>
     <url>http://maven.apache.org</url>
 
     <properties>
