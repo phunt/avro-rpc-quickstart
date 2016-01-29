@@ -119,9 +119,9 @@ Avro is "available from pypi":http://pypi.python.org/pypi/avro
 It seems that the Avro python egg requires snappy.
 
 <code>
-sudo apt-get install libsnappy-dev
-sudo pip install python-snappy
-sudo pip install avro
+* sudo apt-get install libsnappy-dev # 'brew install snappy' if you're on Mac
+* sudo pip install python-snappy
+* sudo pip install avro
 </code>
 
 h3. Python - start_server.py
