@@ -38,9 +38,9 @@ In this sample project you will find four sets of files:
 
 ## mail.avpr - Avro Protocol Declaration
 
-Notice that all examples (java, python, and ruby) share the same Avro protocol declaration. I've not demonstrated it here, but the implmentations are interoperable - the java client can talk to the python server and vice-versa. (which I'll leave as an exercise for the reader)
+Notice that all examples (java, python, and ruby) share the same Avro protocol declaration. I've not demonstrated it here, but the implementations are interoperable - the java client can talk to the python server and vice-versa (which I'll leave as an exercise for the reader).
 
-src/main/avro should contain all of the Avro protocol & schema specifications. mail.avpr declares our simple "Mail" service. You will see:
+`src/main/avro` should contain all of the Avro protocol & schema specifications. `mail.avpr` declares our simple "Mail" service. You will see:
 1. the name & namespace of the protocol
 1. any specialized types used in the messages, Message in this case
 1. we are declaring a "send" message type which takes a Message as an argument and returns a result string
@@ -69,27 +69,29 @@ You'll see the plugin section, which contains:
 
 This plugin element causes the Avro Maven Plugin's compile goal to run during the "generate-sources" maven phase.
 
-<pre>            &lt;plugin>
-                &lt;groupId>org.apache.avro&lt;/groupId>
-                &lt;artifactId>avro-maven-plugin&lt;/artifactId>
-                &lt;version>1.7.5&lt;/version>
-                &lt;executions>
-                    &lt;execution>
-                        &lt;id>schemas&lt;/id>
-                        &lt;phase>generate-sources&lt;/phase>
-                        &lt;goals>
-                            &lt;goal>schema&lt;/goal>
-                            &lt;goal>protocol&lt;/goal>
-                            &lt;goal>idl-protocol&lt;/goal>
-                        &lt;/goals>
-                    &lt;/execution>
-                &lt;/executions>
-            &lt;/plugin></pre>
+```xml
+            <plugin>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro-maven-plugin</artifactId>
+                <version>1.7.5</version>
+                <executions>
+                    <execution>
+                        <id>schemas</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>schema</goal>
+                            <goal>protocol</goal>
+                            <goal>idl-protocol</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+```
 
 ### Main.java - the main() routine of the Java Mail sample
 
-src/main/java/example/Main.java 
-1. the MailImpl class implements the Mail protocol defined in mail.avpr
+`src/main/java/example/Main.java` 
+1. the MailImpl class implements the Mail protocol defined in `mail.avpr`
 1. the startServer() method starts the server which implements the Mail service (Mail/MailImpl)
 1. the main function takes three arguments; to, from and body of the message. After the server is started a Mail client is created, attached to the service, and used to send a "Message", the result of the RPC call is printed to the console.
 
@@ -113,22 +115,24 @@ Avro is [available from pypi](http://pypi.python.org/pypi/avro)
 
 It seems that the Avro python egg requires snappy:
 
-* sudo apt-get install libsnappy-dev # 'brew install snappy' if you're on Mac
-* sudo pip install python-snappy
-* sudo pip install avro
+```bash
+sudo apt-get install libsnappy-dev # 'brew install snappy' if you're on Mac
+sudo pip install python-snappy
+sudo pip install avro
+```
 
 ### Python - start_server.py
 
 Run this first to start the python avro Mail server.
 
-1. the MailResponder class implements the Mail protocol defined in mail.avpr
+1. the MailResponder class implements the Mail protocol defined in `mail.avpr`
 1. main starts the server which implements the Mail service (Mail/MailResponder)
 
 ### Python - send_message.py
 
 You'll see that the structure of the python code is similar to the java/ruby source.
 
-src/main/python/send_message.py
+`src/main/python/send_message.py`
 1. the main function takes three arguments; to, from and body of the message. After the server is started a Mail client is created, attached to the service, and used to send a "Message", the result of the RPC call is printed to the console.
 
 #### Run the python
@@ -160,7 +164,7 @@ Run this first to start the ruby avro Mail server.
 
 You'll see that the structure of the ruby code is similar to the java/python source.
 
-src/main/ruby/sample_ipc_client.rb
+`src/main/ruby/sample_ipc_client.rb`
 1. the main function takes three arguments; to, from and body of the message. After the server is started a Mail client is created, attached to the service, and used to send a "Message", the result of the RPC call is printed to the console.
 
 #### Run the ruby
