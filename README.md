@@ -11,11 +11,12 @@
 From the [official site](http://avro.apache.org/): "Avro is a data serialization system"
 
 Avro provides:
- * Rich data structures.
- * A compact, fast, binary data format.
- * A container file, to store persistent data.
- * Remote procedure call (RPC).
- * Simple integration with dynamic languages. Code generation is not required to read or write data files nor to use or implement RPC protocols. Code generation as an optional optimization, only worth implementing for statically typed languages. 
+
+* Rich data structures.
+* A compact, fast, binary data format.
+* A container file, to store persistent data.
+* Remote procedure call (RPC).
+* Simple integration with dynamic languages. Code generation is not required to read or write data files nor to use or implement RPC protocols. Code generation as an optional optimization, only worth implementing for statically typed languages.
 
 ## License
 
@@ -26,6 +27,7 @@ This project is licensed under the Apache License Version 2.0
 The sample application included in this project simulates a remote service, Mail, where Avro RPC is used to send a message using the service. This document details how to build and run the sample using Maven. The Avro jar files (and jars they depend upon) will be downloaded automatically.
 
 In this sample project you will find four sets of files:
+
 1. This documentation
 1. Sample Avro protocol declaration
 1. Java quick start
@@ -41,6 +43,7 @@ In this sample project you will find four sets of files:
 Notice that all examples (java, python, and ruby) share the same Avro protocol declaration. I've not demonstrated it here, but the implementations are interoperable - the java client can talk to the python server and vice-versa (which I'll leave as an exercise for the reader).
 
 `src/main/avro` should contain all of the Avro protocol & schema specifications. `mail.avpr` declares our simple "Mail" service. You will see:
+
 1. the name & namespace of the protocol
 1. any specialized types used in the messages, Message in this case
 1. we are declaring a "send" message type which takes a Message as an argument and returns a result string
@@ -90,7 +93,8 @@ This plugin element causes the Avro Maven Plugin's compile goal to run during th
 
 ### Main.java - the main() routine of the Java Mail sample
 
-`src/main/java/example/Main.java` 
+`src/main/java/example/Main.java`
+
 1. the MailImpl class implements the Mail protocol defined in `mail.avpr`
 1. the startServer() method starts the server which implements the Mail service (Mail/MailImpl)
 1. the main function takes three arguments; to, from and body of the message. After the server is started a Mail client is created, attached to the service, and used to send a "Message", the result of the RPC call is printed to the console.
@@ -109,7 +113,7 @@ All generated files (source, class, etc...) are written to the "target" director
 
 ## Python
 
-### Requirements
+### Python Requirements
 
 Avro is [available from pypi](http://pypi.python.org/pypi/avro)
 
@@ -133,6 +137,7 @@ Run this first to start the python avro Mail server.
 You'll see that the structure of the python code is similar to the java/ruby source.
 
 `src/main/python/send_message.py`
+
 1. the main function takes three arguments; to, from and body of the message. After the server is started a Mail client is created, attached to the service, and used to send a "Message", the result of the RPC call is printed to the console.
 
 #### Run the python
@@ -147,7 +152,7 @@ then in a separate shell run:
 
 ## Ruby
 
-### Requirements
+### Ruby Requirements
 
 Install the [avro ruby gem](http://rubygems.org/gems/avro)
 
@@ -165,6 +170,7 @@ Run this first to start the ruby avro Mail server.
 You'll see that the structure of the ruby code is similar to the java/python source.
 
 `src/main/ruby/sample_ipc_client.rb`
+
 1. the main function takes three arguments; to, from and body of the message. After the server is started a Mail client is created, attached to the service, and used to send a "Message", the result of the RPC call is printed to the console.
 
 #### Run the ruby
