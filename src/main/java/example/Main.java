@@ -21,8 +21,8 @@ package example;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
-import org.apache.avro.ipc.NettyServer;
-import org.apache.avro.ipc.NettyTransceiver;
+import org.apache.avro.ipc.netty.NettyServer;
+import org.apache.avro.ipc.netty.NettyTransceiver;
 import org.apache.avro.ipc.Server;
 import org.apache.avro.ipc.specific.SpecificRequestor;
 import org.apache.avro.ipc.specific.SpecificResponder;
