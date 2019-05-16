@@ -4,14 +4,14 @@
     <groupId>example.qs</groupId>
     <artifactId>avro-rpc-quickstart</artifactId>
     <packaging>jar</packaging>
-    <version>1.8.2-SNAPSHOT</version>
+    <version>1.9.0-SNAPSHOT</version>
     <name>avro-rpc-quickstart</name>
     <url>http://maven.apache.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <compiler-plugin.version>3.8.0</compiler-plugin.version>
-        <avro.version>1.8.2</avro.version>
+        <avro.version>1.9.0</avro.version>
     </properties>
 
     <dependencies>
