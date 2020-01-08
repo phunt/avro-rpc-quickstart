@@ -125,6 +125,12 @@ sudo pip install python-snappy
 sudo pip install avro
 ```
 
+Note that a separate package is provided for Python3:
+
+```bash
+sudo pip3 install avro-python3
+```
+
 ### Python - start_server.py
 
 Run this first to start the python avro Mail server.
