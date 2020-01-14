@@ -1,0 +1,7 @@
+First run the server as:
+
+./start_server.py
+
+Then run the client as:
+
+./send_message.py avro_user pat Hello_World
