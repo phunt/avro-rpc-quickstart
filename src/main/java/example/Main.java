@@ -47,12 +47,12 @@ public class Main {
 
     private static Server server;
 
-    private static void startServer() throws IOException {
+    private static void startServer() throws IOException, InterruptedException {
         server = new NettyServer(new SpecificResponder(Mail.class, new MailImpl()), new InetSocketAddress(65111));
         // the server implements the Mail protocol (MailImpl)
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         if (args.length != 3) {
             System.out.println("Usage: <to> <from> <body>");
             System.exit(1);
@@ -77,7 +77,12 @@ public class Main {
         System.out.println("Result: " + proxy.send(message));
 
         // cleanup
-        client.close();
+        System.out.println("Closing client");
+        client.close(true);
+        System.out.println("Closing server");
         server.close();
+        server.join();
+        System.out.println("Exiting (forcing due to Netty non-daemon thread introduced between Avro 1.9.2 and 1.10.0)");
+        System.exit(0);
     }
 }
